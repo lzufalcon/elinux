@@ -5,35 +5,35 @@
 
 ## 目录
 
-- [1 前言](#__toc_introduction-11253-7726)
-    - [1.1 扁平设备树是...](#__toc_the-flattened-device-tree-is-3503-31962)
-    - [1.2 扁平设备树不是...](#__toc_the-flattened-device-tree-is-not-22241-28150)
-    - [1.3 历史](#__toc_history-17485-15587)
-    - [1.4 未来](#__toc_future-31620-16080)
-- [2 优势](#__toc_advantages-19720-21359)
-    - [2.1 对于内核发行](#__toc_for-distributions-18617-10143)
-    - [2.2 对于片上系统（SoC）供应商](#__toc_for-system-on-chip-soc-vendors-26457-12705)
-    - [2.3 对于主板设计者](#__toc_for-board-designers-26349-21368)
-    - [2.4 对于嵌入式 Linux 生态系统](#__toc_for-embedded-linux-ecosystem-2561-24549)
-    - [2.5 对于固件或 bootloader 开发者](#__toc_for-firmware-bootloader-developers-29752-9114)
-    - [2.6 其他的优势](#__toc_other-advantages-3973-6455)
-- [3 竞品的解决方案](#__toc_competing-solutions-10447-26598)
-    - [3.1 板子相关特性的数据结构](#__toc_board-specific-data-structures-61-14693)
-    - [3.2 ACPI（高级配置与电源接口）](#__toc_acpi-371-11524)
-    - [3.3 UEFI（统一的可扩展固件接口）](#__toc_uefi-13261-4313)
-    - [3.4 Open FirmWare](#__toc_open-firmware-24006-10609)
-    - [3.5 关于竞品的解决方案的一些注解](#__toc_some-notes-on-the-competing-solutions-28313-17022)
-- [4 资源](#__toc_resources-4310-2905)
-    - [4.1 Wiki 和内核中的参考资料](#__toc_wiki-and-in-kernel-documentation-13656-22915)
-    - [4.2 FAQ,小贴士和最佳范例](#__toc_faq-tips-and-or-best-practices-22391-25395)
-    - [4.3 演示文稿，论文和文章](#__toc_presentations-papers-and-articles-1792-18153)
-        - [4.3.1 各种子系统的设备树描述的笔记](#__toc_notes-on-various-sub-systems-that-device-tree-describes-4225-14266)
-        - [4.3.2 较老的材料](#__toc_older-stuff-23860-9594)
-    - [4.4 工具](#__toc_tools-19227-11963)
-    - [4.5 调试](#__toc_debugging-15068-31173)
-    - [4.6 设备树 irc (互联网中继聊天)](#__toc_device-tree-irc-5836-21142)
-    - [4.7 设备树邮件列表](#__toc_device-tree-mailing-list-11075-27923)
-<span id="__toc_introduction-11253-7726"></span>
+- [1 前言](#introduction)
+    - [1.1 扁平设备树是...](#the-flattened-device-tree-is)
+    - [1.2 扁平设备树不是...](#the-flattened-device-tree-is-not)
+    - [1.3 历史](#history)
+    - [1.4 未来](#future)
+- [2 优势](#advantages)
+    - [2.1 对于内核发行](#for-distributions)
+    - [2.2 对于片上系统（SoC）供应商](#for-system-on-chip-soc-vendors)
+    - [2.3 对于主板设计者](#for-board-designers)
+    - [2.4 对于嵌入式 Linux 生态系统](#for-embedded-linux-ecosystem)
+    - [2.5 对于固件或 bootloader 开发者](#for-firmware-bootloader-developers)
+    - [2.6 其他的优势](#other-advantages)
+- [3 竞品的解决方案](#competing-solutions)
+    - [3.1 板子相关特性的数据结构](#board-specific-data-structures)
+    - [3.2 ACPI（高级配置与电源接口）](#acpi)
+    - [3.3 UEFI（统一的可扩展固件接口）](#uefi)
+    - [3.4 Open FirmWare](#open-firmware)
+    - [3.5 关于竞品的解决方案的一些注解](#some-notes-on-the-competing-solutions)
+- [4 资源](#resources)
+    - [4.1 Wiki 和内核中的参考资料](#wiki-and-in-kernel-documentation)
+    - [4.2 FAQ,小贴士和最佳范例](#faq-tips-and-or-best-practices)
+    - [4.3 演示文稿，论文和文章](#presentations-papers-and-articles)
+        - [4.3.1 各种子系统的设备树描述的笔记](#notes-on-various-sub-systems-that-device-tree-describes)
+        - [4.3.2 较老的材料](#older-stuff)
+    - [4.4 工具](#tools)
+    - [4.5 调试](#debugging)
+    - [4.6 设备树 irc (互联网中继聊天)](#device-tree-irc)
+    - [4.7 设备树邮件列表](#device-tree-mailing-list)
+<span id="introduction"></span>
 
 ## 前言
 
@@ -42,7 +42,7 @@
 设备树源码被编译成一个 .dtb 的二进制文件。.dtb 二进制文件的数据格式通常参考扁平设备树（FDT）。Linux 操作系统通过设备树数据去寻找并在系统中注册设备。FDT 在启动时的很早时刻存取，但是为了在启动后期和系统完全启动后更有效率的存取，它被扩展进内核内部的数据结构中。
 
 目前，Linux 内核可以支持 ARM，x86，Microblaze，PowerPC 和 Sparc 架构读取设备树信息。拓展设备树对其他平台的支持，通过内核架构统一处理平台描述是我们所关注的。
-<span id="__toc_the-flattened-device-tree-is-3503-31962"></span>
+<span id="the-flattened-device-tree-is"></span>
 
 ### 扁平设备树是
 
@@ -57,7 +57,7 @@
 - 中断控制和 IRQ 线的连接
 
 像 init.rd 一样，FDT 也可以被静态的链接进内核或者在 boot 启动时传递给内核。
-<span id="__toc_the-flattened-device-tree-is-not-22241-28150"></span>
+<span id="the-flattened-device-tree-is-not"></span>
 
 ### 扁平设备树不是
 
@@ -74,20 +74,20 @@
 	- 设备树被要求支持 ARM 架构的新板子
 	- 不要求去改变已有的板子端口
 	- 不要求修改已有的固件
-<span id="__toc_history-17485-15587"></span>
+<span id="history"></span>
 	
 ### 历史
 
 - [设备树如何进入 Linux 及其发展](http://elinux.org/Device_tree_history)
-<span id="__toc_future-31620-16080"></span>
+<span id="future"></span>
 
 ### 未来
 
 - [设备树有什么变化及其前进方向](http://elinux.org/Device_tree_future)
-<span id="__toc_advantages-19720-21359"></span>
+<span id="advantages"></span>
 
 ## 优势
-<span id="__toc_for-distributions-18617-10143"></span>
+<span id="for-distributions"></span>
 
 ### 对于内核发行
 
@@ -95,12 +95,12 @@
 	- 通过一个 FDT 镜像表示每台机器（小于 4K/每台）和一些附属的架构镜像代替一个内核镜像表示（约 1-2MB/每台）（如：ARM11，CortexA8，CortexA9 等）。
 	- 使当前的安装镜像去引导具有相同芯片集的未来的硬件平台成为可能。
 	- 备注：FDT 只是解决此问题的一部分。一些启动软件仍然需要正确选择和传递 FDT 镜像。
-<span id="__toc_for-system-on-chip-soc-vendors-26457-12705"></span>
+<span id="for-system-on-chip-soc-vendors"></span>
 	
 ### 对于片上系统（SoC）供应商
 
 - 减少或努力淘汰需要编写的机器支持代码（如 `arch/arm/mach-*`），而把精力放在设备驱动开发上。
-<span id="__toc_for-board-designers-26349-21368"></span>
+<span id="for-board-designers"></span>
 	
 ### 对于主板设计者
 
@@ -112,31 +112,31 @@
 - 例如：Xilinx FPGA 工具链中有一个工具可以从 FPGA 的设计文件中生成设备树源文件。
 	- 既然硬件描述被限制在设备树源文件中，FPGA 工程师可以测试设计的改变而不需要将其添加到内核代码中。
 	- 内核代码不需要手动地从 FPGA 设计文件中提取设计改变。
-<span id="__toc_for-embedded-linux-ecosystem-2561-24549"></span>
+<span id="for-embedded-linux-ecosystem"></span>
 	
 ### 对于嵌入式 Linux 生态系统
 
 - 需要合入的板级支持代码更少
 - 板子有更大的可能得到对此不感兴趣的供应商的主要支持
 - 通过修复或者替换损坏的 FDT 镜像可以有更大的能力去提供有问题的板子的支持
-<span id="__toc_for-firmware-bootloader-developers-29752-9114"></span>
+<span id="for-firmware-bootloader-developers"></span>
 
 ### 对于固件或 bootloader 开发者
 
 - 减少板子描述错误的影响（FDT 作为一个单独镜像存储而不是静态的链接进固件中）。如果初始的发布版的板子描述错误，它可以很容易的升级而不需要危险的重新刷固件
 - 对板子变体的表示方式不需要分配新的机器号或新的 ATAGs
 - 备注：FDT 不是要替代 ATAGs，而是对其补充
-<span id="__toc_other-advantages-3973-6455"></span>
+<span id="other-advantages"></span>
 
 ###	其他的优势
 
 - 设备树源代码和 FDTs 可以很容易的由机器生成和修改。
 	- Xilinx FPGA 工具可以生成设备树源码
 	- U-Boot 固件在启动前可以检查和修改 FDT 镜像
-<span id="__toc_competing-solutions-10447-26598"></span>
+<span id="competing-solutions"></span>
 	
 ##	竞品的解决方案
-<span id="__toc_board-specific-data-structures-61-14693"></span>
+<span id="board-specific-data-structures"></span>
 
 ###	板子相关特性的数据结构
 
@@ -146,26 +146,26 @@ PowerPC 示范的经验提示我们使用自定义的 C 数据结构对于少量
 	
 ATAGs 以优雅的方式--通过定义友好的命名空间传递个体的数据项（内存区域，初始化地址等），操作系统能可靠的解析这些参数。然而，只有一打或者只有 ATAG 被定义是不能足够的表达对板子设计的描述。使用 ATAGs 本质上需要一个分离的机器号去配置每一个板子变体，即使他们给予相同的设计。
 	
-<span id="__toc_acpi-371-11524"></span>
+<span id="acpi"></span>
 尽管如此，ATAG 仍是一个理想的向内核传递 FDT 镜像的方法，其同时被用来传递启动地址。
 ###	ACPI（高级配置与电源接口）
 
 固件由差异化系统描述表（DSDT）提供高级配置与电源接口硬件描述的配置文件。ACPI 应用于 x86 兼容机系统，其由经典 IBM PC BIOS 发展而来。
-<span id="__toc_uefi-13261-4313"></span>
+<span id="uefi"></span>
 
 ###	UEFI（统一的可扩展固件接口）
 
 [可扩展固件接口](http://en.wikipedia.org/wiki/Extensible_Firmware_Interface) 是一个从平台固件到操作系统传递控制命令的规范接口。它由英特尔设计，被用来代替 PC 的 BIOS 接口。
 
 ARM 控制着 UEFI 社区的[成员](http://www.uefi.org/join/list)。这就不难想象 UEFI 由 ARM 实现。
-<span id="__toc_open-firmware-24006-10609"></span>
+<span id="open-firmware"></span>
 
 ###	Open FirmWare
 
 [Open FirmWare](http://en.wikipedia.org/wiki/Open_Firmware) 是 Sun 公司在 20 世纪 80 年代后期设计的一个固件接口规范，移植到了很多架构中。它指定一个运行时操作系统的客户端接口，交叉平台的设备接口，用户接口和描述机器布局的设备树。
 
 FDT 之于 Open FirmWare 就像 DSDT 之于 ACPI。FDT 重用了 Open FirmWare 已经确定了的设备树布局。事实上，Linux PowerPC 支持使用相同的代码库同时支持 Open FirmWare 和 FDT 平台。
-<span id="__toc_some-notes-on-the-competing-solutions-28313-17022"></span>
+<span id="some-notes-on-the-competing-solutions"></span>
 
 ##	关于竞品的解决方案的一些注解
 
@@ -174,10 +174,10 @@ FDT 之于 Open FirmWare 就像 DSDT 之于 ACPI。FDT 重用了 Open FirmWare �
 功能丰富的接口的共同的设计目标是提供一个抽象的启动接口，其只受不同硬件平台的差异的影响，其至少要能初始化操作系统自己本地的设备驱动。一个想法是在新的硬件上启动老的操作系统镜像，像 Linux 的 LiveCD 镜像不需要明确知道硬件配置那样，但是需要依赖固件给其提供信息。
 
 典型的嵌入式固件设计目标是：a）尽可能快的启动系统 b）升级系统镜像 c）可能还需要在初始化板子时提供一些低等级的 debug 调试支持。关注点倾向于系统一旦从内核直接驱动硬件启动后就远离固件(不需要依赖固件运行时服务)。事实上，不建议进行固件升级，因为固件升级可能带来板子无法启动的风险。嵌入式系统中的 ACPI，UEFI 和 Open FirmWare 解决方法通常启动的并不快，虽然可能更好一点，比需要的更复杂一点。就这一点而言，FDT 的方法因其简单而更有优势。如：FDT 提供类似的表示方法去描述硬件，但是它可以工作在现存的固件上，也可以升级而不需要刷新固件。
-<span id="__toc_resources-4310-2905"></span>
+<span id="resources"></span>
 
 ## 资源
-<span id="__toc_wiki-and-in-kernel-documentation-13656-22915"></span>
+<span id="wiki-and-in-kernel-documentation"></span>
 
 ### Wiki 和内核中的参考资料
 [设备树主要的wiki在：](http://www.devicetree.org/Main_Page)
@@ -193,11 +193,11 @@ http://www.devicetree.org/Main_Page 对设备树的概念进行了很好的介�
 - bindings/submitting-patches.txt: 重要的说明：
 	- patch 提交者
 	- kernel 维护者
-<span id="__toc_faq-tips-and-or-best-practices-22391-25395"></span>
+<span id="faq-tips-and-or-best-practices"></span>
 	
 ### FAQ,小贴士和最佳范例
 请看 [Linux 设备树指南](http://elinux.org/Linux_Drivers_Device_Tree_Guide)
-<span id="__toc_presentations-papers-and-articles-1792-18153"></span>
+<span id="presentations-papers-and-articles"></span>
 
 ### 演示文稿，论文和文章
 
@@ -236,12 +236,12 @@ http://www.devicetree.org/Main_Page 对设备树的概念进行了很好的介�
 	- ELC（Embedded Linux Conferences（嵌入式Linux会议））2012的幻灯片和视频：http://free-electrons.com/blog/elc-2012-videos/
 - 设备树地位的报告 Grant Likely, ELC Europe 2011
 	- ELC Europe 2011的幻灯片和视频：http://free-electrons.com/blog/elce-2011-videos/
-<span id="__toc_notes-on-various-sub-systems-that-device-tree-describes-4225-14266"></span>
+<span id="notes-on-various-sub-systems-that-device-tree-describes"></span>
 
 #####	各种子系统的设备树描述的笔记
 
 - 引脚控制子系统-增加接地引脚和 GPIO Presented at Linaro Connect, 2013 by Linus Walleij
-<span id="__toc_older-stuff-23860-9594"></span>
+<span id="older-stuff"></span>
 	- http://www.df.lth.se/~triad/papers/pincontrol.pdf
 
 #### 较老的材料
@@ -258,7 +258,7 @@ http://www.devicetree.org/Main_Page 对设备树的概念进行了很好的介�
 	- http://www.openfirmware.info/Bindings
 - 来自外部的 FreeBSD ARM 通讯的观点
 	- http://wiki.freebsd.org/FreeBSDArmBoards
-<span id="__toc_tools-19227-11963"></span>
+<span id="tools"></span>
 
 ###	工具
 
@@ -271,7 +271,7 @@ http://www.devicetree.org/Main_Page 对设备树的概念进行了很好的介�
 	- http://xilinx.wikidot.com/device-tree-generator
 
 	设备树生成器是一个 Xilinx EDK 工具，拥有 BSP 自动生成的特性
-<span id="__toc_debugging-15068-31173"></span>
+<span id="debugging"></span>
 	
 ###	调试
 
@@ -287,12 +287,12 @@ http://www.devicetree.org/Main_Page 对设备树的概念进行了很好的介�
 	CFLAGS_device.o := -DDEBUG
 	CFLAGS_platform.o := -DDEBUG
 	CFLAGS_fdt.o := -DDEBUG
-<span id="__toc_device-tree-irc-5836-21142"></span>
+<span id="device-tree-irc"></span>
 
 ###	设备树 irc (互联网中继聊天)
 
 设备树 irc 通道是在 freenode.net 上的 #devicetree。
-<span id="__toc_device-tree-mailing-list-11075-27923"></span>
+<span id="device-tree-mailing-list"></span>
 
 ###	设备树邮件列表
 
