@@ -13,7 +13,7 @@
     * [Power Management](http://www.elinux.org/Power_Management) (@[zhongbin])
     * [File Systems](http://www.elinux.org/File_Systems)
     * [Real Time](http://www.elinux.org/Real_Time) (@[hduffddybz])
-    * [Device drivers](http://www.elinux.org/Device_drivers)
+    * [Device drivers](http://www.elinux.org/Device_drivers)(@[EmbolismSoil])
     * [Device Tree](http://www.elinux.org/Device_Tree) (@[sdfd])
     * Hardware Hacking
     * Development Platforms
@@ -202,4 +202,5 @@
 [apcwowo]:https://github.com/apcwowo
 [Gracker]:https://github.com/Gracker
 [lovelers]:https://github.com/lovelers
-[llz383455526]:https://github.com/llz383455526
+[llz383455526]:https://github.com/llz383455526  
+[EmbolismSoil]:https://github.com/EmbolismSoil
