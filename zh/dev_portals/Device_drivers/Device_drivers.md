@@ -19,7 +19,7 @@
     file operations (read/write, mmap, ioctl, blocking and nonblocking
     mode, polling), kfifo, completion, interrupt, tasklet, work,
     kthread, timer, misc device, proc fs, UART 0x3f8, HW loopback, SW
-    loopback, ftracer。此代码在测试脚本下可以正常工作。
+    loopback, ftracer 此代码在测试脚本下可以正常工作。
 -   [LDD3 - 启动Linux设备驱动的示例, 第三版,
     已更新](https://github.com/martinezjavier/ldd3/), 使用3.2.0版本的内核进行编译
     -   [pci\_skel.c](https://github.com/martinezjavier/ldd3/blob/master/pci/pci_skel.c)
@@ -39,14 +39,14 @@
      USB驱动程序框架](http://lxr.free-electrons.com/source/drivers/usb/usb-skeleton.c)
     (经过稍微修改后即可编译通过)
 -   [skeletonfb.c - Frame
-     Buffer设备驱动框架](http://lxr.free-electrons.com/source/drivers/video/skeletonfb.c)
+     Buffer 设备驱动框架](http://lxr.free-electrons.com/source/drivers/video/skeletonfb.c)
     (不能编译通过)
 -   [pcihp\_skeleton.c -
-     PCI热插拔控制器驱动程序框架](http://lxr.free-electrons.com/source/drivers/pci/hotplug/pcihp_skeleton.c)
--   [loopback.c - 一个简单的网络设备驱动程序，实现了ifconfig
+     PCI 热插拔控制器驱动程序框架](http://lxr.free-electrons.com/source/drivers/pci/hotplug/pcihp_skeleton.c)
+-   [loopback.c - 一个简单的网络设备驱动程序，实现了 ifconfig
      lo](http://lxr.free-electrons.com/source/drivers/net/loopback.c)
 -   [gpio\_driver - Raspberry Pi model
-     B+的GPIO设备驱动程序简单示例](https://github.com/23ars/linux_gpio_driver) (尚未进行完整的测试)
+     B+ 的 GPIO 设备驱动程序简单示例](https://github.com/23ars/linux_gpio_driver) (尚未进行完整的测试)
 
 ## 资源
 
